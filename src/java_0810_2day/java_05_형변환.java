@@ -34,6 +34,8 @@ public class java_05_형변환 {
 		System.out.println("명시적 형변환(유실 발생) = "+s);	//데이터 유실 발생
 		System.out.println("원본 = "+i3);
 		System.out.println("명시적 형변환(유실 발생X) = "+s2);
+		System.out.println("명시적 형변환(유실 발생X) = "+s2);
+		
 		
 	}//main
 
