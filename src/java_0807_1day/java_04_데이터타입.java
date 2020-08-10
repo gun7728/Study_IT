@@ -42,6 +42,7 @@ public class java_04_데이터타입 {
 		System.out.println(name.equals(name2));	// 값 = 주소안의 값 비교
 		
 		// Ctrl + Alt + 방향키 아래 (복사)		
+		// Ctrl + Alt + 방향키 아래 (복사)		
 
 	}
 
