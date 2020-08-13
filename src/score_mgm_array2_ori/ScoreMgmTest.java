@@ -6,7 +6,7 @@
  * 	4.종료
  * 
  */
-package score_mgm_array2;
+package score_mgm_arry2;
 
 import java.util.Scanner;
 
@@ -14,37 +14,31 @@ public class ScoreMgmTest {
 
 	public static void main(String[] args) {
 		//기본
-
-		System.out.println("=========================================");
-		System.out.println("============   성적 관리  프로그램    ============");
-		System.out.println("=등록(1) 조회(2) 검색(3) 수정(4) 삭제(5) 종료(0)=");
-		System.out.println("=========================================");
-		
-		System.out.println();
-		System.out.print("몇명의 학생을 입력하시겠습니까? : ");
 		Scanner scan = new Scanner(System.in);
-		int stuNum = scan.nextInt();
-
-				
-		String[] nameList = new String[stuNum];
-		String[] subList = {"국어","영어","수학","사회","과학"}; //과목 리스트
-		int[][] scoreList = new int[stuNum][subList.length+2]; //총점, 평균을 위해서 +2
+		String[] nameList = new String[3];
+		int[][] scoreList = new int[3][5];
+		String[] subList = {"국어","영어","수학"}; //과목 리스트
 		String select="";
 		int count=0; // 숫자 카운트용
 
 		boolean flag=true;
 		
 		//메뉴
+		System.out.println("==================================");
+		System.out.println("=========  성적 관리  프로그램    =========");
+		System.out.println("=등록(1) 조회(2) 검색(3) 수정(4) 종료(0)=");
+		System.out.println("==================================");
 		
 
 				
-		while(flag) {		
+		while(flag) {			
+			
 			System.out.print("\n메뉴 선택 : ");		
 			int menu = scan.nextInt();
 			
 			switch(menu) {
 				case 1: 	//1.등록								
-						if(count!=subList.length) {
+						if(count!=3) {
 								for(int i=count;i<scoreList.length;i++) {	
 	
 									System.out.println("\n\t등록");
@@ -55,13 +49,13 @@ public class ScoreMgmTest {
 									int tot=0;
 									
 									for(int j=0;j<scoreList[i].length;j++) {
-										if(j<subList.length) {
+										if(j<3) {
 										System.out.print(subList[j]+" : ");
 										scoreList[i][j] = scan.nextInt();	
 										tot+=scoreList[i][j];
-										}else if(j==subList.length) { //총점
+										}else if(j==3) { //총점
 											scoreList[i][j]=tot;
-										}else if(j==subList.length+1) { //평균
+										}else if(j==4) { //평균
 											scoreList[i][j]=tot/subList.length;
 										}
 									}//for.j
@@ -90,14 +84,8 @@ public class ScoreMgmTest {
 				case 2:
 					if(nameList[0]!=null) {
 						System.out.println("\n\t조회\n");	
-						System.out.println("");
-						System.out.print("이름\t");
-						for(int i=0;i<subList.length;i++) {
-							System.out.print(subList[i]+"\t");
-						}
-						System.out.print("총점\t평균\n");
-						
-						System.out.println("");
+						System.out.println("===========================================");
+						System.out.println("이름\t국어\t영어\t수학\t총점\t평균");
 						for(int i=0;i<scoreList.length;i++) {
 							if(nameList[i]!=null) {
 								System.out.print("\n"+nameList[i]+"\t");
@@ -119,21 +107,13 @@ public class ScoreMgmTest {
 						System.out.println();
 						for(int i=0;i<nameList.length;i++) {
 							if(inName.equals(nameList[i])) {
-
-								System.out.println("\n\t조회\n");	
-								System.out.println("");
-								System.out.print("이름\t");
-								for(int t=0;t<subList.length;t++) {
-									System.out.print(subList[t]+"\t");
-								}
-								System.out.print("총점\t평균\n");		
-
-								System.out.print(nameList[i]+"\t");
-								for(int j=0;j<scoreList[i].length;j++)
-								{
+								System.out.println("===========================================");
+								System.out.println("이름\t국어\t영어\t수학\t총점\t평균");	
+								System.out.print("\n"+nameList[i]+"\t");
+								
+								for(int j=0;j<scoreList[i].length;j++) {
 									System.out.print(scoreList[i][j]+"\t");	
 								}
-								
 								i=nameList.length;
 								
 							}else if(i==nameList.length-1)
@@ -159,13 +139,13 @@ public class ScoreMgmTest {
 								nameList[temp]=scan.next();
 								int tot=0;
 								for(int j=0;j<scoreList[temp].length;j++) {
-									if(j<subList.length) {
+									if(j<3) {
 										System.out.print(subList[j]+" : ");
 										scoreList[temp][j] = scan.nextInt();	
 										tot+=scoreList[temp][j];
-										}else if(j==subList.length) { //총점
+										}else if(j==3) { //총점
 											scoreList[temp][j]=tot;
-										}else if(j==subList.length+1) { //평균
+										}else if(j==4) { //평균
 											scoreList[temp][j]=tot/subList.length;
 										}//if.j									
 								}//for.j			
@@ -179,49 +159,24 @@ public class ScoreMgmTest {
 					System.out.println();
 					break;
 					
-				case 5:
-					if(nameList[0]!=null)
-					{
-						int rdx=0;
-						boolean remove_result = false;
-						
-						System.out.print("\n\t삭제할 학생 이름 : ");
+				case 5:		
+					if(nameList[0]!=null) {
+						System.out.print("\n\t수정할 학생 이름 : ");
 						String inName = scan.next();
-						System.out.println();
+						System.out.println();						
 						for(int i=0;i<nameList.length;i++) {
-							if(nameList[i]!=null) {							
-								if(nameList[i].equals(inName)) {
-									count--; // 등록 카운터 하락
-									System.out.println("삭제가 완료되었습니다");										
-									rdx=i;
-									remove_result=true;
-									i=nameList.length;
-								}									
-							}else
-								System.out.println("등록 먼저 해주세요");
-						}
-						
-						
-						//4.삭제
-						if(remove_result) {
-							int size = nameList.length;
-							for(int i=0;i<size;i++) {
-								if(i==rdx) 
-								{
-									
-									for(int k=rdx;k<size-1;k++) 
-									{
-										nameList[k] = nameList[k+1];
-										for(int j=0;j<scoreList[k].length;j++)
-										{
-											scoreList[k][j] = scoreList[k+1][j];
-										}
-									}
-									size--;
-									nameList[size]=null;
+							if(inName.equals(nameList[i])) {	
+								temp=i;
+								i=nameList.length;
+								nameList[temp]=null;
+								for(int j=0;j<scoreList[temp].length;j++) {
+									scoreList[temp][j]=0;
 								}
-							}							
-						}//if												
+								count--;
+								System.out.println("삭제 돼었습니다.");
+							}else if(i==nameList.length-1)
+								System.out.println("등록되지 않았습니다.");
+						}
 					}else{
 						System.out.println("등록 먼저 해주세요");						
 					}
