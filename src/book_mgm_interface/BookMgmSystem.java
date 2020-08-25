@@ -25,12 +25,25 @@ public class BookMgmSystem implements DataStandardManager {
 	 */
 	public Object input(String fname){
 		BookVO book = new BookVO();
-		
 		System.out.println("\n\t등록을 시작합니다.");
 				
 		if(fname.equals("insert")){
 			System.out.print("ISBN>>");
-			book.setIsbn(scan.next());
+			String isbn = scan.next();
+			if(bookList.size()==0) {				
+				book.setIsbn(isbn);				
+			}else {				
+				if(searchAddress(isbn)!=-1) {					
+					if(isbn.equals(bookList.get(searchAddress(isbn)).getIsbn())) {
+						System.out.println("\n\t중복하는 값이 존재합니다");
+						choiceMenu();
+					}//equals					
+				}else {
+					book.setIsbn(isbn);						
+				}//searchAddress
+				
+			}//size
+			
 		} 
 		
 		System.out.print("도서명>>");
